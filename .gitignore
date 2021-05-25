@@ -8,6 +8,9 @@ nupkg/
 # Visual Studio Code
 .vscode
 
+# Terraform
+.terraform
+
 # Rider
 .idea
 
@@ -35,3 +38,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+.terraform.lock.hcl
+terraform.tfstate.backup
+terraform.tfstate
