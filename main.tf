@@ -6,6 +6,11 @@ provider "azurerm" {
   }
 }
 
+variable "imagebuild" {
+  type = string
+  description = "the latest image build version"
+}
+
 terraform {
   backend "azurerm" {
     resource_group_name = "rg_st_tf"
@@ -36,7 +41,7 @@ resource "azurerm_container_group" "tf_cg_sample" {
   # Specify the container information
   container {
     name = "sampleapi"
-    image = "mohamadlawand/sampleapi"
+    image = "mohamadlawand/sampleapi:${var.imagebuild}"
     cpu = "1"
     memory = "1"
 
