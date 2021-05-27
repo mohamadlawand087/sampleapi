@@ -28,4 +28,29 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
+
+- stage: Provision
+  displayName: 'Creating terraform on Azure'
+  dependsOn: Build
+  jobs:
+    - job : provision
+      displayName: 'Provision container instance'
+      pool:
+        vmImage: ubuntu-latest
+      variables: # vars from azure devOps in library
+      - group: SampleAPIVariables
+      steps:
+        - script: |
+            set -e 
+
+            terraform init -input=false
+            terraform apply -input=false -auto-approve
+          name: 'RunTerraform'
+          displayName: 'Run Terraform'
+          env: # these vars are being passed from our SampleAPIVariables that we specified in Azure DevOps
+            ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+            ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+            ARM_TENANT_ID: $(ARM_TENANT_ID)
+            ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+
     

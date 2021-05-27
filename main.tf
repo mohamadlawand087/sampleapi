@@ -6,6 +6,15 @@ provider "azurerm" {
   }
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name = "rg_st_tf"
+    storage_account_name = "tfstaccsa"
+    container_name = "tfdata"
+    key = "terraform.tfstate"
+  }
+}
+
 # since we are using azure we need to create a resource group since its the bases of everything in azure
 # the name we provide on line 11 is only used in our tf file not on azure whent the resource is created
 # the naming should unique
