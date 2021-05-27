@@ -1,7 +1,7 @@
 # we need to specify the provider that we are going to use
 provider "azurerm" {
-  version = "2.5.0"
-  features {
+  required_providers = "2.5.0"
+   features {
     
   }
 }
